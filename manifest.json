@@ -4,8 +4,24 @@
   "icons": [
     {
       "src": "/24764561.png",
-      "sizes": "512x512",
+      "sizes": "400x400",
       "type": "image/png"
+    }
+  ],
+  "screenshots" : [
+    {
+      "src": "https://sdfsdf.dev/1280x720.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Homescreen of Awesome App"
+    },
+    {
+      "src": "https://sdfsdf.dev/720x1280.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "List of Awesome Resources available in Awesome App"
     }
   ],
   "start_url": "/",
