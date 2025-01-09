@@ -1,7 +1,11 @@
 import { useState } from 'react'
-import { Html5Qrcode } from "html5-qrcode"
+import { Html5QrcodeSupportedFormats,Html5QrcodeScanner } from "html5-qrcode"
 
 import './App.css'
+
+
+
+
 
 function App() {
   const [decodedText, setDecodedText] = useState('')
@@ -10,13 +14,29 @@ function App() {
     <div id='reader'>qr</div>
     <div className="card">
       <button onClick={() => {
-        const html5QrCode = new Html5Qrcode("reader");
-        const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-          setDecodedText(decodedText)
-          console.log(`Code matched = ${decodedText}`, decodedResult);
-        };
-        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
-        html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback).catch(err => err);
+      function onScanSuccess(decodedText, decodedResult) {
+        // Handle the scanned code as you like, for example:
+        console.log(`Code matched = ${decodedText}`, decodedResult);
+        setDecodedText(decodedText)
+      }
+      
+      const formatsToSupport = [
+        Html5QrcodeSupportedFormats.QR_CODE,
+        Html5QrcodeSupportedFormats.UPC_A,
+        Html5QrcodeSupportedFormats.UPC_E,
+        Html5QrcodeSupportedFormats.UPC_EAN_EXTENSION,
+      ];
+      const html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader",
+        {
+          fps: 10,
+          qrbox: { width: 250, height: 250 },
+          formatsToSupport: formatsToSupport
+        },
+        /* verbose= */ false);
+      html5QrcodeScanner.render(onScanSuccess);
+      
+   
 
       }}>
         start {decodedText}
